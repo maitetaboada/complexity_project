@@ -1,0 +1,20 @@
+In order to be able to extract the stemmed mpqa markers some manual screening of the automatically generated stems of the markers listed in the mpqa had to be performed. The following stems were changed and/or added to the final list of stemmed markers:
+
+for stems ending in -i 
+e.g. horrify	verb	y	strongsubj	horrifi	_vb
+and entry was added with the stem ending in -y so that the base form would also be found.
+e.g. horrify	verb	y	strongsubj	horrify	_vb
+
+for words ending in -ate the stems were extended to make the pattern as unique/identifiable as possible:
+e.g. implicate	verb	y	weaksubj	implic	_vb
+was changed to
+implicate	verb	y	weaksubj	implicat	_vb
+
+sometimes the ing-form was added. E.g.
+luring	verb	y	strongsubj	luring	_vb
+lure	verb	y	strongsubj	lure	_vb
+
+or irregular past forms were added. E.g.
+misbecame	verb	y	strongsubj	misbecame	_vb
+misbecome	verb	y	strongsubj	misbecom	_vb
+
