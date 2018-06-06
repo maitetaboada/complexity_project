@@ -9,6 +9,21 @@ output:  2 csv files with texts as rownames and features as columns.
 One csv with raw feature frequencies; one csv with normalised frequencies 
 """
 
+"""
+TASK:
+sample input data: news_corpus700
+1. COUNT:
+	using compinion_features to count:
+	- adverbials[X]
+	- modals[X]
+	- connectives[X]
+	- adverbs_negative[X]
+	- adverbs_positive
+
+2. POS: (see resources and example)
+	- tagged with POS
+	- get the stemmed
+"""
 import re
 import os
 import pandas as pd
@@ -64,10 +79,15 @@ def count_variant_feature(features, text, features_type):
 	return feature_count.values()
 
 def main(corpus_folder_dir, features_folder_dir, is_variant):
+	# TODO: input / output
+
+	# count invariant features
 	if is_variant:
 		out_folder = "variant_feature_count_result"
+		out_sum_file = out_folder + "/variant_feature_sum.csv"
 	else:
 		out_folder = "invariant_feature_count_result"
+		out_sum_file = out_folder + "/invariant_feature_sum.csv"
 	if not os.path.exists(out_folder):
 			os.makedirs(out_folder)
 	if not os.path.exists(corpus_folder_dir):
@@ -76,7 +96,10 @@ def main(corpus_folder_dir, features_folder_dir, is_variant):
 		raise Exception("There is no such feature folder!", features_folder_dir)
 	
 	files = os.listdir(corpus_folder_dir)
+	feature_sum_dict = dict(zip(files, [[] for i in range(len(files))]))
+
 	for features_file in os.listdir(features_folder_dir):
+		features_total = 0
 		if features_file.split('.')[-1] != "csv":
 			continue
 		try:
@@ -94,9 +117,13 @@ def main(corpus_folder_dir, features_folder_dir, is_variant):
 						features_type = features_file[0]
 						counts = count_variant_feature(list(features.ix[:,0]), text, features_type)
 						result += "," + ",".join([str(c) for c in counts])
+						features_total = sum(counts)
 					else:
 						for feature in list(features.ix[:,0]):
-							result += "," + str(count_invariant_feature(feature, text))
+							feature_appear_times = count_invariant_feature(feature, text)
+							result += "," + str(feature_appear_times)
+							features_total += feature_appear_times
+					feature_sum_dict[file].append(str(features_total))
 				except IOError:
 					print("fail to open the file: " + file)
 
@@ -104,6 +131,14 @@ def main(corpus_folder_dir, features_folder_dir, is_variant):
 					out.write(result + "\n")
 		except IOError:
 			print("fail to open features file: " + features_file)
+
+	with open(out_sum_file, "a") as out:
+		header = "file_names, " + ", ".join(os.listdir(features_folder_dir)) + '\n'
+		out.write(header)
+		for k, v in feature_sum_dict.items():
+			line = k + ',' + ",".join(v) + '\n'
+			out.write(line)
+
 
 if __name__ == "__main__":
 	
