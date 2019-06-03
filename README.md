@@ -1,14 +1,19 @@
 # complexity_project
-General steps, resources and scripts for complexity & subjectivity project
+Resources and scripts for complexity & subjectivity project
 Katharina Ehret and Maite Taboada
 
 This repository contains the following resources: 
 
-1. Argumentation features and SOCALfeatures. These folders contain the lists of argumentation and subjectivity markers used for measuring subjectivity in Ehret & Taboada (in preparation). 
+1. Subjectivity. This folder contains the lists of argumentation and subjectivity markers used for measuring the concept subjectivity in Ehret & Taboada (in preparation). It contains two subfolders
 
-2. Scripts for data generation, clean-up and the retrieval of the subjectivity markers.
+other_features: stance adverbials.csv, connectives.csv and modals.csv
 
-General steps of data processing and generation:
+socal_features: socal_invariant, socal_variant
 
-1. Subjectivity: The argumentation and subjectivity markers were retrieved from the database using the sub_marker.py script. The script takes a folder containing the csv files with the relevant features. The argumentation features and the SOCAL invariant features were retrieved using the 'False' argument to indicate that those features are invariant. The SOCAL variant features were retrieved using the "True" argument to indicate that those features are variant and need to be retrieved according to their POS-tag. The statistical analysis of subjectivity markers is based on the summed csv output of the script. 
+other_features contains lists of stance adverbials, connectives and modals which are "invariant features", i.e. they cannot take different forms. 
 
+socal_features contains lists of positive and negative adverbs, which classify as "invariant features" as well as negative and positive adjectives, nouns and verbs, which classify as "variant features", i.e. they can take different forms such as plural, comparative or third person singular. All positive and negative features were taken from SOCAL (REF) and have a valency of |4| and |5|.  
+
+2. Scripts. This folder contains the scripts for data generation, clean-up and the retrieval of the subjectivity markers.
+
+sub_marker.py: This script retrieves the raw text frequencies of the above listed argumentation and subjectivity markers. 
