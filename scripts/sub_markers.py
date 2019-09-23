@@ -99,7 +99,7 @@ def main(corpus_folder_dir, features_folder_dir, is_variant):
 	feature_sum_dict = dict(zip(files, [[] for i in range(len(files))]))
 
 	for features_file in os.listdir(features_folder_dir):
-		features_total = 0
+		#features_total = 0
 		if features_file.split('.')[-1] != "csv":
 			continue
 		try:
@@ -109,6 +109,7 @@ def main(corpus_folder_dir, features_folder_dir, is_variant):
 				out.write("words," + ",".join\
 					(dict(zip(list(features.ix[:,0]), [0]*len(list(features.ix[:,0])))).keys()) + "\n")
 			for file in files:
+				features_total = 0
 				result = file
 				try:
 					with open(corpus_folder_dir + '/' + file) as f:
