@@ -1,5 +1,7 @@
 # Compinion Script
 
+Note: ignore all other scripts in this directory. "countFeat.py" is the only one you'll need.
+
 The script countFeat.py is written with the project structure from the vault in mind. All paths are hard-coded according to the file hierarchy of the vault project.
 
 To run the script from the command line use python3.x as follows:
