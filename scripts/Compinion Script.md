@@ -26,4 +26,6 @@ The output will be structured as follows:
 - socal_counts/variant will contain files for positive and negative adjectives, nouns and verbs with separate counts for each word per file.
 - total_counts/other will contain files for each type of adverbial, connective and modal feature with the sum of that feature for each file. 
 - total_counts/socal will contain files for each type of positive and negative adjective, noun and verb feature with the sum of that feature for each file. 
-- total_counts also contains an aggregate_totals.csv file with all the pertinent information.
+- total_counts also contains an aggregate_totals.csv file with all the pertinent information. Note that the token count in this file is performed by deleting punctuation and joining to the previous word:
+-- don't -> dont
+-- the end. And -> the end And
